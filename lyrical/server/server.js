@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const models = require("./models");
 const expressGraphQL = require("express-graphql");
@@ -7,7 +9,7 @@ const schema = require("./schema/schema");
 
 const app = express();
 
-const MONGO_URI = "mongodb+srv://mongoAtlas:ZPCyyKy6jefXVjGY@cluster0.sd8nh5x.mongodb.net/?retryWrites=true&w=majority";
+const MONGO_URI = process.env.MONGO_ATLAS_URI;
 if (!MONGO_URI) {
 	throw new Error("You must provide a MongoLab URI");
 }
@@ -33,4 +35,3 @@ const webpackConfig = require("../webpack.config.js");
 app.use(webpackMiddleware(webpack(webpackConfig)));
 
 module.exports = app;
-

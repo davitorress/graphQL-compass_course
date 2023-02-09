@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const models = require("./models");
 const { graphqlHTTP } = require("express-graphql");
@@ -12,7 +14,7 @@ const schema = require("./schema/schema");
 const app = express();
 
 // Replace with your mongoLab URI
-const MONGO_URI = "mongodb+srv://dave:0Z8LVZz7FeoT8IYO@cluster0.d6ppdcx.mongodb.net/?retryWrites=true&w=majority";
+const MONGO_URI = process.env.MONGO_ATLAS_URI;
 
 // Mongoose's built in promise library is deprecated, replace it with ES2015 Promise
 mongoose.Promise = global.Promise;
@@ -66,4 +68,3 @@ const webpackConfig = require("../webpack.config.js");
 app.use(webpackMiddleware(webpack(webpackConfig)));
 
 module.exports = app;
-
